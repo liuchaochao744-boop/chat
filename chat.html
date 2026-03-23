@@ -16,60 +16,61 @@
     --radius: 12px; --radius-sm: 8px;
     --font: 'Noto Sans SC', sans-serif; --mono: 'JetBrains Mono', monospace;
   }
-
   html, body { height: 100%; }
   body {
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--text);
-    height: 100%;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    font-size: 14px;
-    line-height: 1.6;
-    -webkit-text-size-adjust: 100%;
+    font-family: var(--font); background: var(--bg); color: var(--text);
+    height: 100%; height: 100dvh; display: flex; flex-direction: column;
+    overflow: hidden; font-size: 14px; line-height: 1.6; -webkit-text-size-adjust: 100%;
   }
+
+  /* ── Server config screen ── */
+  #server-screen {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; z-index: 200; padding: 16px;
+  }
+  .server-card {
+    background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px;
+    padding: 32px 36px; width: 100%; max-width: 440px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  @media (max-width: 480px) { .server-card { padding: 24px 20px; } }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-icon svg { width: 18px; height: 18px; fill: white; }
+  .card-title { font-size: 19px; font-weight: 700; }
+  .card-sub { font-size: 13px; color: var(--text2); line-height: 1.7; }
+  .step-list { display: flex; flex-direction: column; gap: 10px; }
+  .step { display: flex; gap: 10px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .step-n { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step code { font-family: var(--mono); font-size: 11px; background: var(--bg3); padding: 2px 7px; border-radius: 4px; color: var(--text); display: inline-block; }
+  .field-group { display: flex; flex-direction: column; gap: 7px; }
+  .field-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.06em; text-transform: uppercase; }
+  .field-input {
+    background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm);
+    color: var(--text); font-family: var(--mono); font-size: 13px;
+    padding: 10px 14px; outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .field-input:focus { border-color: var(--accent); }
+  .btn-primary {
+    background: var(--accent); color: white; border: none; border-radius: var(--radius-sm);
+    padding: 12px; font-family: var(--font); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: background 0.2s; -webkit-tap-highlight-color: transparent;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-primary:active { opacity: 0.85; }
+  .err-text { font-size: 12px; color: var(--red); display: none; }
 
   /* ── Setup ── */
   #setup-screen {
     position: fixed; inset: 0; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100; padding: 16px; overflow-y: auto;
+    display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px;
   }
   .setup-card {
-    background: var(--bg2); border: 1px solid var(--border2);
-    border-radius: 20px; padding: 32px 36px;
-    width: 100%; max-width: 420px;
-    display: flex; flex-direction: column; gap: 18px;
-    margin: auto;
+    background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px;
+    padding: 32px 36px; width: 100%; max-width: 420px;
+    display: flex; flex-direction: column; gap: 18px; margin: auto;
   }
-  @media (max-width: 480px) {
-    .setup-card { padding: 24px 20px; border-radius: 16px; }
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .logo-icon svg { width: 18px; height: 18px; fill: white; }
-  .setup-title { font-size: 20px; font-weight: 700; }
-  .field-group { display: flex; flex-direction: column; gap: 7px; }
-  .field-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.06em; text-transform: uppercase; }
-  .field-input {
-    background: var(--bg3); border: 1px solid var(--border2);
-    border-radius: var(--radius-sm); color: var(--text);
-    font-family: var(--font); font-size: 16px; /* 16px prevents iOS zoom */
-    padding: 11px 14px; outline: none; transition: border-color 0.2s; width: 100%;
-  }
-  .field-input:focus { border-color: var(--accent); }
-  .btn-primary {
-    background: var(--accent); color: white; border: none;
-    border-radius: var(--radius-sm); padding: 13px;
-    font-family: var(--font); font-size: 15px; font-weight: 600;
-    cursor: pointer; transition: background 0.2s;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .btn-primary:hover { background: var(--accent2); }
-  .btn-primary:active { opacity: 0.85; }
+  @media (max-width: 480px) { .setup-card { padding: 24px 20px; border-radius: 16px; } }
   .link-panel { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm); overflow: hidden; }
   .link-hint { padding: 12px 14px; font-size: 12px; color: var(--text3); text-align: center; }
   .link-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--border); }
@@ -78,15 +79,22 @@
   .link-label { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
   .link-url { font-size: 11px; color: var(--text3); font-family: var(--mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .btn-copy {
-    background: var(--bg4); border: 1px solid var(--border2);
-    border-radius: 6px; color: var(--text2); font-family: var(--font);
-    font-size: 11px; padding: 6px 12px; cursor: pointer; transition: all 0.15s; flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
+    background: var(--bg4); border: 1px solid var(--border2); border-radius: 6px;
+    color: var(--text2); font-family: var(--font); font-size: 11px; padding: 6px 12px;
+    cursor: pointer; transition: all 0.15s; flex-shrink: 0; -webkit-tap-highlight-color: transparent;
   }
   .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
   .btn-copy.ok { background: rgba(62,207,142,0.12); border-color: var(--green); color: var(--green); }
+  .server-badge {
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(62,207,142,0.08); border: 1px solid rgba(62,207,142,0.2);
+    border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12px;
+  }
+  .server-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; flex-shrink: 0; }
+  .server-badge-url { font-family: var(--mono); color: var(--green); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-change { font-size: 11px; color: var(--text3); background: none; border: none; cursor: pointer; flex-shrink: 0; text-decoration: underline; }
 
-  /* ── Connecting / Error ── */
+  /* ── Connecting ── */
   #connecting {
     position: fixed; inset: 0; background: var(--bg);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -97,16 +105,15 @@
   .error-box {
     display: none; background: rgba(242,110,110,0.1); border: 1px solid rgba(242,110,110,0.3);
     border-radius: var(--radius-sm); padding: 14px 16px;
-    font-size: 13px; color: var(--red); line-height: 1.6; max-width: 340px;
+    font-size: 13px; color: var(--red); line-height: 1.7; max-width: 340px;
   }
   .error-box.on { display: block; }
 
   /* ── Chat ── */
   #app { display: flex; flex-direction: column; height: 100%; height: 100dvh; }
-
   .header {
     display: flex; align-items: center; gap: 10px;
-    padding: 0 16px; height: 52px;
+    padding: 0 14px; height: 52px;
     border-bottom: 1px solid var(--border); background: var(--bg2); flex-shrink: 0;
   }
   @media (min-width: 640px) { .header { padding: 0 20px; height: 56px; } }
@@ -114,32 +121,16 @@
   .header-icon svg { width: 15px; height: 15px; fill: white; }
   .header-info { flex: 1; min-width: 0; }
   .header-room { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .my-avatar {
-    display: flex; align-items: center; gap: 7px;
-    background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 20px; padding: 4px 10px 4px 5px; flex-shrink: 0;
-  }
-  .my-avatar-dot {
-    width: 24px; height: 24px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; color: white; flex-shrink: 0;
-  }
+  .my-avatar { display: flex; align-items: center; gap: 6px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px 3px 4px; flex-shrink: 0; }
+  .my-avatar-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0; }
   .my-avatar-name { font-size: 12px; font-weight: 600; }
   .badge { display: flex; align-items: center; gap: 5px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 11px; color: var(--text2); flex-shrink: 0; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
 
-  .msgs {
-    flex: 1; overflow-y: auto; overflow-x: hidden;
-    padding: 16px; display: flex; flex-direction: column; gap: 2px;
-    -webkit-overflow-scrolling: touch;
-  }
+  .msgs { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 14px; display: flex; flex-direction: column; gap: 2px; -webkit-overflow-scrolling: touch; }
   @media (min-width: 640px) { .msgs { padding: 20px; } }
   .msgs::-webkit-scrollbar { width: 4px; }
   .msgs::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
-
-  .sysmsg { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
-  .sysline { flex: 1; height: 1px; background: var(--border); }
-  .systext { font-size: 12px; color: var(--text3); white-space: nowrap; }
 
   .msggroup { display: flex; flex-direction: column; gap: 2px; margin: 4px 0; }
   .msggroup.self { align-items: flex-end; }
@@ -148,88 +139,38 @@
   .avatar { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0; }
   .mname { font-size: 12px; font-weight: 600; }
   .mtime { font-size: 11px; color: var(--text3); font-family: var(--mono); }
-
-  .bubble {
-    max-width: min(360px, 78vw);
-    padding: 8px 12px; border-radius: 16px;
-    font-size: 14px; line-height: 1.55;
-    animation: pop .2s ease; word-break: break-word;
-  }
+  .bubble { max-width: min(360px, 78vw); padding: 8px 12px; border-radius: 16px; font-size: 14px; line-height: 1.55; animation: pop .2s ease; word-break: break-word; }
   @media (min-width: 640px) { .bubble { max-width: 480px; padding: 8px 14px; } }
   .bubble.them { background: var(--bg3); border: 1px solid var(--border); border-top-left-radius: 4px; }
   .bubble.me { background: var(--accent); border-top-right-radius: 4px; color: white; }
-
   .empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--text3); }
   .empty-icon { font-size: 36px; opacity: 0.4; }
 
-  /* ── Input ── */
-  .input-area {
-    padding: 10px 14px 12px;
-    border-top: 1px solid var(--border); background: var(--bg2); flex-shrink: 0;
-    /* Reserve space for iOS safe area */
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
-  }
+  .input-area { padding: 10px 14px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); background: var(--bg2); flex-shrink: 0; }
   @media (min-width: 640px) { .input-area { padding: 14px 20px 16px; } }
-
   .typing-row { display: none; align-items: center; gap: 6px; padding: 0 0 6px 2px; height: 24px; }
   .typing-row.on { display: flex; }
   .typing-text { font-size: 12px; color: var(--text3); }
   .tdots span { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--text3); margin: 0 1px; animation: bounce 1.2s infinite; }
   .tdots span:nth-child(2) { animation-delay: .2s; }
   .tdots span:nth-child(3) { animation-delay: .4s; }
-
-  .input-row {
-    display: flex; gap: 8px; align-items: flex-end;
-    background: var(--bg3); border: 1px solid var(--border2);
-    border-radius: var(--radius); padding: 8px 8px 8px 14px;
-    transition: border-color .2s;
-  }
+  .input-row { display: flex; gap: 8px; align-items: flex-end; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius); padding: 8px 8px 8px 14px; transition: border-color .2s; }
   .input-row:focus-within { border-color: var(--accent); }
   .input-row.locked { opacity: .45; pointer-events: none; }
-
-  #msg-input {
-    flex: 1; background: transparent; border: none; outline: none;
-    color: var(--text); font-family: var(--font);
-    font-size: 16px; /* 16px = no iOS zoom */
-    resize: none; max-height: 100px; line-height: 1.5; padding: 2px 0;
-  }
+  #msg-input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--font); font-size: 16px; resize: none; max-height: 100px; line-height: 1.5; padding: 2px 0; }
   #msg-input::placeholder { color: var(--text3); }
-
-  .btn-send {
-    width: 36px; height: 36px; background: var(--accent); border: none;
-    border-radius: 8px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background .2s; flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-  }
+  .btn-send { width: 36px; height: 36px; background: var(--accent); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
   .btn-send:hover { background: var(--accent2); }
   .btn-send:active { opacity: 0.8; }
   .btn-send svg { width: 16px; height: 16px; fill: white; }
   .btn-send:disabled { opacity: .35; cursor: not-allowed; }
-
   .hint { font-size: 11px; color: var(--text3); margin-top: 6px; text-align: right; }
   .hint.center { text-align: center; }
-  /* Hide keyboard hint on mobile */
   @media (max-width: 640px) { .hint { display: none; } }
-
-  .scroll-btn {
-    position: absolute; bottom: 75px; right: 14px;
-    width: 34px; height: 34px; background: var(--bg4);
-    border: 1px solid var(--border2); border-radius: 50%;
-    cursor: pointer; display: none; align-items: center; justify-content: center;
-    font-size: 15px; z-index: 10;
-  }
+  .scroll-btn { position: absolute; bottom: 75px; right: 14px; width: 34px; height: 34px; background: var(--bg4); border: 1px solid var(--border2); border-radius: 50%; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 15px; z-index: 10; }
   .scroll-btn:hover { background: var(--accent); }
   .scroll-btn.on { display: flex; }
-
-  /* Toast for errors */
-  .toast {
-    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-    background: rgba(242,110,110,0.95); color: white;
-    font-size: 13px; padding: 10px 16px; border-radius: 20px;
-    white-space: nowrap; z-index: 999; display: none;
-    max-width: 90vw; text-align: center;
-  }
+  .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(242,110,110,0.95); color: white; font-size: 13px; padding: 10px 18px; border-radius: 20px; white-space: nowrap; z-index: 999; display: none; max-width: 90vw; text-align: center; }
   .toast.on { display: block; animation: pop .2s ease; }
 
   @keyframes pop { from { opacity: 0; transform: translateX(-50%) translateY(6px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
@@ -240,33 +181,65 @@
 </head>
 <body>
 
-<!-- Setup -->
+<!-- Step 1: 填入服务器地址 -->
+<div id="server-screen">
+  <div class="server-card">
+    <div class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></div>
+      <span class="card-title">配置服务器</span>
+    </div>
+    <p class="card-sub">首先在你的电脑上启动服务器和穿透隧道，然后把穿透地址填到下面。</p>
+
+    <div class="step-list">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>打开命令行，进入 server.js 所在文件夹，运行：<br><code>node server.js</code></div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>再开一个命令行窗口，运行：<br><code>cloudflared tunnel --url http://localhost:3000</code><br>等待出现 <code>https://xxx.trycloudflare.com</code> 地址</div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>把上面那个 <code>https://xxx.trycloudflare.com</code> 地址粘贴到下方</div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">穿透地址</span>
+      <input class="field-input" id="server-url-input" placeholder="https://xxx.trycloudflare.com" autocomplete="off" />
+    </div>
+    <div class="err-text" id="server-err">地址格式不对，请粘贴完整的 https:// 开头的地址</div>
+    <button class="btn-primary" id="btn-connect">连接</button>
+  </div>
+</div>
+
+<!-- Step 2: 生成链接 -->
 <div id="setup-screen" style="display:none;">
   <div class="setup-card">
     <div class="logo">
       <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></div>
-      <span class="setup-title">生成聊天链接</span>
+      <span class="card-title">生成聊天链接</span>
+    </div>
+    <div class="server-badge">
+      <div class="server-badge-dot"></div>
+      <span class="server-badge-url" id="server-badge-url"></span>
+      <button class="btn-change" id="btn-change-server">更换</button>
     </div>
     <div class="field-group">
       <span class="field-label">房间名</span>
-      <input class="field-input" id="room-input" placeholder="输入任意房间名…" maxlength="40" autocomplete="off" />
+      <input class="field-input" id="room-input" placeholder="输入任意房间名…" maxlength="40" autocomplete="off" style="font-family:var(--font);font-size:15px;" />
     </div>
     <button class="btn-primary" id="btn-gen">生成链接</button>
     <div class="link-panel">
       <div class="link-hint" id="lp-hint">填写房间名后点击生成</div>
       <div id="link-items" style="display:none;">
         <div class="link-item">
-          <div class="link-info">
-            <div class="link-label">链接 A</div>
-            <div class="link-url" id="url-a">—</div>
-          </div>
+          <div class="link-info"><div class="link-label">链接 A</div><div class="link-url" id="url-a">—</div></div>
           <button class="btn-copy" id="copy-a">复制</button>
         </div>
         <div class="link-item">
-          <div class="link-info">
-            <div class="link-label">链接 B</div>
-            <div class="link-url" id="url-b">—</div>
-          </div>
+          <div class="link-info"><div class="link-label">链接 B</div><div class="link-url" id="url-b">—</div></div>
           <button class="btn-copy" id="copy-b">复制</button>
         </div>
       </div>
@@ -274,10 +247,10 @@
   </div>
 </div>
 
-<!-- Connecting / Error -->
+<!-- Connecting -->
 <div id="connecting" style="display:none;">
   <div class="spinner" id="spinner"></div>
-  <div class="conn-label" id="conn-label">正在连接…</div>
+  <div class="conn-label" id="conn-label">正在连接服务器…</div>
   <div class="error-box" id="error-box"></div>
 </div>
 
@@ -294,17 +267,12 @@
     </div>
     <div class="badge"><div class="dot"></div><span>已连接</span></div>
   </div>
-
   <div style="flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column;">
     <div class="msgs" id="msgs">
-      <div class="empty" id="empty">
-        <div class="empty-icon">💬</div>
-        <div style="font-size:14px;">还没有消息</div>
-      </div>
+      <div class="empty" id="empty"><div class="empty-icon">💬</div><div style="font-size:14px;">还没有消息</div></div>
     </div>
     <div class="scroll-btn" id="scroll-btn">↓</div>
   </div>
-
   <div class="input-area">
     <div class="typing-row" id="typing-row">
       <div class="tdots"><span></span><span></span><span></span></div>
@@ -320,58 +288,71 @@
   </div>
 </div>
 
-<!-- Error toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── Config ──
-const SUPA_URL = 'https://uhyvdbzwrwifwqifybsp.supabase.co';
-const SUPA_KEY = 'sb_publishable_vjfjhC6IjV7jKpbWeQl6KQ_Tjw0kXjm';
 const NAME_A = '刘超',   COLOR_A = '#7c6ef7';
 const NAME_B = '孟令飞', COLOR_B = '#f5a623';
+const SERVER_KEY = 'chat_server_url';
 
-// ── URL params ──
-const params    = new URLSearchParams(location.search);
-const paramRole = params.get('role');
-const paramRoom = params.get('room');
+const urlParams  = new URLSearchParams(location.search);
+const paramRole  = urlParams.get('role');
+const paramRoom  = urlParams.get('room');
+const paramServer = urlParams.get('server');
 
-if (paramRole && paramRoom) {
+// ── Route ──
+if (paramRole && paramRoom && paramServer) {
+  // Direct chat link
   document.getElementById('connecting').style.display = 'flex';
-  startChat(paramRole, paramRoom);
+  startChat(decodeURIComponent(paramServer), paramRole, paramRoom);
 } else {
-  showSetup();
+  // Check saved server
+  const saved = localStorage.getItem(SERVER_KEY);
+  if (saved && !paramRole) {
+    showSetup(saved);
+  } else {
+    showServerScreen();
+  }
 }
 
-// ── REST helper ──
-async function sbFetch(path, opts = {}) {
-  const headers = {
-    'apikey': SUPA_KEY,
-    'Authorization': 'Bearer ' + SUPA_KEY,
-    'Content-Type': 'application/json',
-    'Prefer': opts.prefer || 'return=representation',
+// ════════ SERVER SCREEN ════════
+function showServerScreen() {
+  document.getElementById('server-screen').style.display = 'flex';
+  const inp = document.getElementById('server-url-input');
+  const err = document.getElementById('server-err');
+
+  document.getElementById('btn-connect').onclick = async () => {
+    const raw = inp.value.trim().replace(/\/$/, '');
+    if (!raw.startsWith('https://') && !raw.startsWith('http://')) {
+      err.style.display = ''; return;
+    }
+    err.style.display = 'none';
+    // Test connection
+    try {
+      const res = await fetch(raw + '/');
+      if (!res.ok) throw new Error('server error');
+      localStorage.setItem(SERVER_KEY, raw);
+      document.getElementById('server-screen').style.display = 'none';
+      showSetup(raw);
+    } catch(e) {
+      err.style.display = '';
+      err.textContent = '无法连接到该地址，请确认服务器已启动且地址正确';
+    }
   };
-  const res = await fetch(SUPA_URL + '/rest/v1/' + path, {
-    method: opts.method || 'GET',
-    headers,
-    body: opts.body || undefined,
-  });
-  const text = await res.text();
-  if (!res.ok) throw new Error('HTTP ' + res.status + ': ' + text);
-  return text ? JSON.parse(text) : null;
+  inp.onkeydown = e => { if (e.key === 'Enter') document.getElementById('btn-connect').click(); };
 }
 
-// ── Toast ──
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('on');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('on'), 4000);
-}
-
-// ════════════ SETUP ════════════
-function showSetup() {
+// ════════ SETUP ════════
+function showSetup(serverUrl) {
   document.getElementById('setup-screen').style.display = 'flex';
+  document.getElementById('server-badge-url').textContent = serverUrl;
+
+  document.getElementById('btn-change-server').onclick = () => {
+    localStorage.removeItem(SERVER_KEY);
+    document.getElementById('setup-screen').style.display = 'none';
+    showServerScreen();
+  };
+
   const ri = document.getElementById('room-input');
   document.getElementById('btn-gen').onclick = gen;
   ri.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); gen(); } };
@@ -381,15 +362,16 @@ function showSetup() {
   function gen() {
     const room = ri.value.trim(); if (!room) { ri.focus(); return; }
     const base = location.href.split('?')[0];
+    const enc  = encodeURIComponent(serverUrl);
     document.getElementById('lp-hint').style.display = 'none';
     document.getElementById('link-items').style.display = '';
-    document.getElementById('url-a').textContent = base + '?role=normal&room=' + encodeURIComponent(room);
-    document.getElementById('url-b').textContent = base + '?role=willing&room=' + encodeURIComponent(room);
+    document.getElementById('url-a').textContent = base + '?role=normal&room=' + encodeURIComponent(room) + '&server=' + enc;
+    document.getElementById('url-b').textContent = base + '?role=willing&room=' + encodeURIComponent(room) + '&server=' + enc;
   }
 }
 
-// ════════════ CHAT ════════════
-async function startChat(role, room) {
+// ════════ CHAT ════════
+async function startChat(serverUrl, role, room) {
   const myName  = role === 'willing' ? NAME_B : NAME_A;
   const myColor = role === 'willing' ? COLOR_B : COLOR_A;
   const myId    = role + '_' + Math.random().toString(36).slice(2, 8);
@@ -400,42 +382,41 @@ async function startChat(role, room) {
   let lastTs       = new Date(0).toISOString();
   let typingTimer  = null;
 
-  // ── Test connection & table existence ──
+  async function api(path, opts = {}) {
+    const res = await fetch(serverUrl + path, {
+      method: opts.method || 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: opts.body || undefined,
+    });
+    const text = await res.text();
+    if (!res.ok) throw new Error('HTTP ' + res.status + ': ' + text);
+    return text ? JSON.parse(text) : null;
+  }
+
+  // Test + load
   try {
-    await sbFetch('chat_messages?limit=1', { prefer: 'return=representation' });
+    await api('/');
   } catch(e) {
     document.getElementById('spinner').style.display = 'none';
     document.getElementById('conn-label').textContent = '连接失败';
     const eb = document.getElementById('error-box');
     eb.classList.add('on');
-    if (String(e).includes('42P01') || String(e).includes('relation') || String(e).includes('does not exist')) {
-      eb.innerHTML = '数据库表不存在。<br>请前往 Supabase → SQL Editor，运行建表 SQL 后刷新页面。<br><br><small>错误：' + esc(String(e)) + '</small>';
-    } else {
-      eb.innerHTML = '无法连接到服务器，请检查网络后刷新重试。<br><br><small>' + esc(String(e)) + '</small>';
-    }
+    eb.innerHTML = '无法连接到服务器。<br>请确认 <code>node server.js</code> 正在运行，且穿透地址正确。<br><br><small>' + esc(String(e)) + '</small>';
     return;
   }
 
-  // ── Load meta flag ──
   async function checkMeta() {
     try {
-      const rows = await sbFetch(
-        'chat_messages?room=eq.' + encodeURIComponent(room) + '&msg_type=eq.meta&limit=1',
-        { prefer: 'return=representation' }
-      );
-      if (rows && rows.length > 0) { liuchaoSent = true; updateLock(); }
-    } catch(e) { console.warn('meta:', e); }
+      const d = await api('/meta?room=' + encodeURIComponent(room));
+      if (d && d.liuchaoSent) { liuchaoSent = true; updateLock(); }
+    } catch(e) {}
   }
 
-  // ── Load all messages ──
   async function loadAll() {
     try {
-      const rows = await sbFetch(
-        'chat_messages?room=eq.' + encodeURIComponent(room) + '&msg_type=eq.message&order=created_at.asc&limit=300',
-        { prefer: 'return=representation' }
-      );
-      if (rows) rows.forEach(r => renderRow(r));
-    } catch(e) { console.warn('load:', e); }
+      const rows = await api('/messages?room=' + encodeURIComponent(room) + '&type=message');
+      if (rows) rows.forEach(renderRow);
+    } catch(e) {}
   }
 
   function renderRow(r) {
@@ -445,80 +426,64 @@ async function startChat(role, room) {
     addBubble({ senderName: r.sender_name, senderColor: r.sender_color, text: r.text, time: toTime(r.created_at) }, r.sender_id === myId);
   }
 
-  // ── Poll loop ──
   async function poll() {
     try {
-      const rows = await sbFetch(
-        'chat_messages?room=eq.' + encodeURIComponent(room) +
-        '&msg_type=eq.message&created_at=gt.' + encodeURIComponent(lastTs) +
-        '&order=created_at.asc',
-        { prefer: 'return=representation' }
-      );
-      if (rows && rows.length) rows.forEach(r => renderRow(r));
+      const rows = await api('/messages?room=' + encodeURIComponent(room) + '&type=message&since=' + encodeURIComponent(lastTs));
+      if (rows && rows.length) rows.forEach(renderRow);
       if (!liuchaoSent) await checkMeta();
       await pollTyping();
-    } catch(e) { console.warn('poll:', e); }
+    } catch(e) {}
     setTimeout(poll, 1500);
   }
 
   async function pollTyping() {
     try {
       const cutoff = new Date(Date.now() - 4000).toISOString();
-      const rows = await sbFetch(
-        'chat_messages?room=eq.' + encodeURIComponent(room) +
-        '&msg_type=eq.typing&sender_id=neq.' + encodeURIComponent(myId) +
-        '&created_at=gt.' + encodeURIComponent(cutoff) +
-        '&order=created_at.desc&limit=5',
-        { prefer: 'return=representation' }
-      );
-      const names = [...new Set((rows || []).map(r => r.sender_name))];
+      const rows = await api('/messages?room=' + encodeURIComponent(room) + '&type=typing&since=' + encodeURIComponent(cutoff));
+      const names = [...new Set((rows || []).filter(r => r.sender_id !== myId).map(r => r.sender_name))];
       document.getElementById('typing-row').classList.toggle('on', names.length > 0);
       if (names.length) document.getElementById('typing-text').textContent = names.join('、') + ' 正在输入…';
     } catch(e) {}
   }
 
-  // ── Init ──
   await checkMeta();
   await loadAll();
 
   document.getElementById('connecting').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('header-room').textContent = '# ' + room;
-  const avatarDot  = document.getElementById('my-avatar-dot');
-  avatarDot.style.background = myColor;
-  avatarDot.textContent = myName.slice(0, 2);
+
+  const dot = document.getElementById('my-avatar-dot');
+  dot.style.background = myColor;
+  dot.textContent = myName.slice(0, 2);
   document.getElementById('my-avatar-name').textContent = myName;
   document.getElementById('my-avatar-name').style.color = myColor;
 
   updateLock();
   poll();
 
-  // ── Input wiring ──
   const input   = document.getElementById('msg-input');
   const sendBtn = document.getElementById('btn-send');
+
+  // Re-apply lock now that elements exist
+  updateLock();
 
   input.oninput = () => {
     resize(input);
     if (canSend()) sendBtn.disabled = !input.value.trim();
-  };
-
-  // Enter to send (desktop); on mobile just newline
-  input.onkeydown = e => {
-    if (e.key === 'Enter' && !e.shiftKey && window.innerWidth >= 640) {
-      e.preventDefault(); send();
-    }
-  };
-  sendBtn.onclick = send;
-
-  // Typing broadcast on input
-  input.addEventListener('input', () => {
+    // Typing broadcast
     clearTimeout(typingTimer);
-    sbFetch('chat_messages', {
-      method: 'POST', prefer: 'return=minimal',
-      body: JSON.stringify({ room, sender_id: myId, sender_name: myName, sender_color: myColor, text: 'typing', msg_type: 'typing' })
+    api('/messages', {
+      method: 'POST',
+      body: JSON.stringify({ room, sender_id: myId, sender_name: myName, sender_color: myColor, text: 'typing', type: 'typing' })
     }).catch(() => {});
     typingTimer = setTimeout(() => {}, 3000);
-  });
+  };
+
+  input.onkeydown = e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  };
+  sendBtn.onclick = () => send();
 
   document.getElementById('scroll-btn').onclick = toBottom;
   document.getElementById('msgs').onscroll = function() {
@@ -527,53 +492,52 @@ async function startChat(role, room) {
     document.getElementById('scroll-btn').classList.toggle('on', isScrolledUp);
   };
 
-  // ── Functions ──
   function canSend() { return role === 'normal' || liuchaoSent; }
 
   function updateLock() {
     const locked = !canSend();
+    const inp    = document.getElementById('msg-input');
+    const btn    = document.getElementById('btn-send');
+    const hint   = document.getElementById('bottom-hint');
     document.getElementById('input-row').classList.toggle('locked', locked);
-    const hint = document.getElementById('bottom-hint');
+    if (!inp || !btn || !hint) return;
     if (locked) {
-      input.placeholder = '等待刘超发送第一条消息…';
-      hint.textContent  = '刘超发出第一条消息后，你才可以回复';
-      hint.className    = 'hint center';
-      sendBtn.disabled  = true;
+      inp.placeholder  = '等待刘超发送第一条消息…';
+      hint.textContent = '刘超发出第一条消息后，你才可以回复';
+      hint.className   = 'hint center';
+      btn.disabled     = true;
     } else {
-      input.placeholder = '输入消息…';
-      hint.textContent  = 'Enter 发送 · Shift+Enter 换行';
-      hint.className    = 'hint';
-      if (input.value.trim()) sendBtn.disabled = false;
+      inp.placeholder  = '输入消息…';
+      hint.textContent = 'Enter 发送 · Shift+Enter 换行';
+      hint.className   = 'hint';
+      btn.disabled     = !inp.value.trim();
     }
   }
 
   async function send() {
     if (!canSend()) return;
-    const raw = input.value.trim(); if (!raw) return;
+    const raw = document.getElementById('msg-input').value.trim();
+    if (!raw) return;
     const text = role === 'willing' ? '我愿意' : raw;
 
     // Optimistic UI
-    const tmpId = 'tmp_' + Date.now();
-    seenIds.add(tmpId);
     addBubble({ senderName: myName, senderColor: myColor, text, time: toTime(new Date().toISOString()) }, true);
-    input.value = ''; resize(input); sendBtn.disabled = true;
+    document.getElementById('msg-input').value = '';
+    resize(document.getElementById('msg-input'));
+    document.getElementById('btn-send').disabled = true;
 
     try {
-      await sbFetch('chat_messages', {
-        method: 'POST', prefer: 'return=minimal',
-        body: JSON.stringify({ room, sender_id: myId, sender_name: myName, sender_color: myColor, text, msg_type: 'message' })
+      await api('/messages', {
+        method: 'POST',
+        body: JSON.stringify({ room, sender_id: myId, sender_name: myName, sender_color: myColor, text, type: 'message' })
       });
       if (role === 'normal' && !liuchaoSent) {
         liuchaoSent = true;
-        await sbFetch('chat_messages', {
-          method: 'POST', prefer: 'return=minimal',
-          body: JSON.stringify({ room, sender_id: myId, sender_name: myName, sender_color: myColor, text: 'liuchao_sent', msg_type: 'meta' })
-        });
+        await api('/meta', { method: 'POST', body: JSON.stringify({ room, liuchaoSent: true }) });
         updateLock();
       }
     } catch(e) {
-      showToast('发送失败，请检查网络');
-      console.error('send error:', e);
+      showToast('发送失败，请检查网络连接');
     }
   }
 
@@ -603,6 +567,13 @@ async function startChat(role, room) {
 function resize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; }
 function toTime(iso) { return new Date(iso).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }); }
 function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('on'), 4000);
+}
 function doCopy(btn, text) {
   const ok = () => { btn.textContent = '已复制 ✓'; btn.classList.add('ok'); setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('ok'); }, 2000); };
   navigator.clipboard.writeText(text).then(ok).catch(() => { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); ok(); });
