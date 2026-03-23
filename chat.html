@@ -18,31 +18,19 @@
   }
   body { font-family: var(--font); background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; font-size: 14px; line-height: 1.6; }
 
-  /* ── Config needed screen ── */
-  #config-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
-  .config-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 36px 40px; width: 500px; max-width: 100%; display: flex; flex-direction: column; gap: 18px; }
-  .config-title { font-size: 18px; font-weight: 700; }
-  .config-steps { display: flex; flex-direction: column; gap: 10px; }
-  .step { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: var(--text2); line-height: 1.6; }
-  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .step a { color: var(--accent); text-decoration: none; }
-  .step a:hover { text-decoration: underline; }
-  .step code { font-family: var(--mono); font-size: 11px; background: var(--bg3); padding: 1px 6px; border-radius: 4px; color: var(--text); }
-  .field-group { display: flex; flex-direction: column; gap: 7px; }
-  .field-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.06em; text-transform: uppercase; }
-  .field-input { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm); color: var(--text); font-family: var(--mono); font-size: 12px; padding: 10px 14px; outline: none; transition: border-color 0.2s; width: 100%; }
-  .field-input:focus { border-color: var(--accent); }
-  .btn-primary { background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); padding: 12px; font-family: var(--font); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-  .btn-primary:hover { background: var(--accent2); }
-  .err-msg { font-size: 12px; color: var(--red); display: none; }
-
-  /* ── Setup ── */
+  /* Setup */
   #setup-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 100; }
   .setup-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 36px 40px; width: 400px; display: flex; flex-direction: column; gap: 20px; }
   .logo { display: flex; align-items: center; gap: 10px; }
   .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .logo-icon svg { width: 18px; height: 18px; fill: white; }
   .setup-title { font-size: 20px; font-weight: 700; }
+  .field-group { display: flex; flex-direction: column; gap: 7px; }
+  .field-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.06em; text-transform: uppercase; }
+  .field-input { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm); color: var(--text); font-family: var(--font); font-size: 14px; padding: 10px 14px; outline: none; transition: border-color 0.2s; width: 100%; }
+  .field-input:focus { border-color: var(--accent); }
+  .btn-primary { background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); padding: 12px; font-family: var(--font); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--accent2); }
   .link-panel { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm); overflow: hidden; }
   .link-hint { padding: 12px 14px; font-size: 12px; color: var(--text3); text-align: center; }
   .link-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--border); }
@@ -54,12 +42,12 @@
   .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
   .btn-copy.ok { background: rgba(62,207,142,0.12); border-color: var(--green); color: var(--green); }
 
-  /* ── Connecting ── */
+  /* Connecting */
   #connecting { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 50; }
   .spinner { width: 32px; height: 32px; border: 3px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
   .conn-label { font-size: 14px; color: var(--text2); }
 
-  /* ── Chat ── */
+  /* Chat */
   #app { display: flex; flex-direction: column; height: 100vh; }
   .header { display: flex; align-items: center; gap: 12px; padding: 0 20px; height: 56px; border-bottom: 1px solid var(--border); background: var(--bg2); flex-shrink: 0; }
   .header-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
@@ -99,8 +87,6 @@
   .input-row { display: flex; gap: 10px; align-items: flex-end; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius); padding: 8px 8px 8px 16px; transition: border-color .2s; position: relative; }
   .input-row:focus-within { border-color: var(--accent); }
   .input-row.locked { opacity: .45; pointer-events: none; }
-  .input-row.willing #msg-input { color: transparent; caret-color: var(--text); }
-  .overlay { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--text3); pointer-events: none; display: none; font-style: italic; }
   #msg-input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--font); font-size: 14px; resize: none; max-height: 120px; line-height: 1.5; padding: 4px 0; }
   #msg-input::placeholder { color: var(--text3); }
   .btn-send { width: 36px; height: 36px; background: var(--accent); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .1s; flex-shrink: 0; }
@@ -122,33 +108,7 @@
 </head>
 <body>
 
-<!-- Step 1: Firebase config setup (only shown when config missing) -->
-<div id="config-screen" style="display:none;">
-  <div class="config-card">
-    <div class="config-title">🔧 需要配置 Firebase（一次性）</div>
-    <div class="config-steps">
-      <div class="step"><div class="step-num">1</div><div>打开 <a href="https://console.firebase.google.com/" target="_blank">Firebase 控制台</a>，用 Google 账号登录，点「创建项目」，随便起个名字，关掉 Google Analytics，创建完成。</div></div>
-      <div class="step"><div class="step-num">2</div><div>进入项目后，点左侧「构建」→「Realtime Database」→「创建数据库」→ 选任意位置 → 以<strong>测试模式</strong>启动（允许读写）。</div></div>
-      <div class="step"><div class="step-num">3</div><div>点左侧齿轮「项目设置」→「常规」→ 下拉到「您的应用」→ 点网页图标 <code>&lt;/&gt;</code> 注册应用（名字随意）→ 复制 <code>firebaseConfig</code> 里的内容粘贴到下方。</div></div>
-    </div>
-    <div class="field-group">
-      <span class="field-label">粘贴 firebaseConfig 的 JSON 内容</span>
-      <textarea class="field-input" id="firebase-config-input" rows="7" placeholder='{
-  "apiKey": "AIza...",
-  "authDomain": "xxx.firebaseapp.com",
-  "databaseURL": "https://xxx-default-rtdb.firebaseio.com",
-  "projectId": "xxx",
-  "storageBucket": "xxx.appspot.com",
-  "messagingSenderId": "...",
-  "appId": "..."
-}'></textarea>
-    </div>
-    <div class="err-msg" id="config-err">格式有误，请粘贴完整的 firebaseConfig JSON 对象</div>
-    <button class="btn-primary" id="btn-save-config">保存配置并继续</button>
-  </div>
-</div>
-
-<!-- Step 2: Generate links (setup page) -->
+<!-- Setup -->
 <div id="setup-screen" style="display:none;">
   <div class="setup-card">
     <div class="logo">
@@ -157,10 +117,10 @@
     </div>
     <div class="field-group">
       <span class="field-label">房间名</span>
-      <input class="field-input" id="room-input" placeholder="输入任意房间名…" maxlength="40" autocomplete="off" style="font-family:var(--font);font-size:14px;" />
+      <input class="field-input" id="room-input" placeholder="输入任意房间名…" maxlength="40" autocomplete="off" />
     </div>
     <button class="btn-primary" id="btn-gen">生成链接</button>
-    <div class="link-panel" id="link-panel">
+    <div class="link-panel">
       <div class="link-hint" id="lp-hint">填写房间名后点击生成</div>
       <div id="link-items" style="display:none;">
         <div class="link-item">
@@ -210,7 +170,6 @@
       <span class="typing-text" id="typing-text"></span>
     </div>
     <div class="input-row" id="input-row">
-      <div class="overlay" id="overlay">我愿意</div>
       <textarea id="msg-input" placeholder="输入消息… (Enter 发送)" rows="1"></textarea>
       <button class="btn-send" id="btn-send" disabled>
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
@@ -220,58 +179,61 @@
   </div>
 </div>
 
-<!-- Firebase SDK -->
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getDatabase, ref, push, onChildAdded, set, onValue, off } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+<script>
+// ── Supabase config ──
+const SUPA_URL = 'https://uhyvdbzwrwifwqifybsp.supabase.co';
+const SUPA_KEY = 'sb_publishable_vjfjhC6IjV7jKpbWeQl6KQ_Tjw0kXjm';
 
-// ── Firebase config (hardcoded) ──
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDE-FzERJmpuxylJ-Pro8aET5cG1feUSRk",
-  authDomain: "jishi-47993.firebaseapp.com",
-  databaseURL: "https://jishi-47993-default-rtdb.firebaseio.com",
-  projectId: "jishi-47993",
-  storageBucket: "jishi-47993.firebasestorage.app",
-  messagingSenderId: "230370446677",
-  appId: "1:230370446677:web:c034ac7624614777e533dc",
-  measurementId: "G-X0KC9C3LZE"
-};
-
-// ── Helpers ──
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function nowStr() { return new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}); }
-function resize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
-function doCopy(btn, text) {
-  const ok = () => { btn.textContent='已复制 ✓'; btn.classList.add('ok'); setTimeout(()=>{btn.textContent='复制';btn.classList.remove('ok');},2000); };
-  navigator.clipboard.writeText(text).then(ok).catch(()=>{ const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);ok(); });
-}
+// ── User config ──
+const NAME_A = '刘超',   COLOR_A = '#7c6ef7';
+const NAME_B = '孟令飞', COLOR_B = '#f5a623';
 
 // ── URL params ──
-const params = new URLSearchParams(location.search);
-const paramRole = params.get('role'), paramRoom = params.get('room');
+const params    = new URLSearchParams(location.search);
+const paramRole = params.get('role');
+const paramRoom = params.get('room');
 
-// ── Route ──
 if (paramRole && paramRoom) {
   document.getElementById('connecting').style.display = 'flex';
-  startChat(FIREBASE_CONFIG, paramRole, paramRoom);
+  startChat(paramRole, paramRoom);
 } else {
   showSetup();
 }
 
+// ── Supabase REST helper ──
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(SUPA_URL + '/rest/v1/' + path, {
+    ...opts,
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || 'return=representation',
+      ...(opts.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(res.status + ': ' + t);
+  }
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
 
 // ════════════ SETUP ════════════
 function showSetup() {
   document.getElementById('setup-screen').style.display = 'flex';
   const ri = document.getElementById('room-input');
   document.getElementById('btn-gen').onclick = gen;
-  ri.onkeydown = e => { if(e.key==='Enter') gen(); };
+  ri.onkeydown = e => { if (e.key === 'Enter') gen(); };
   document.getElementById('copy-a').onclick = function() { doCopy(this, document.getElementById('url-a').textContent); };
   document.getElementById('copy-b').onclick = function() { doCopy(this, document.getElementById('url-b').textContent); };
+
   function gen() {
-    const room = ri.value.trim(); if(!room){ri.focus();return;}
+    const room = ri.value.trim(); if (!room) { ri.focus(); return; }
     const base = location.href.split('?')[0];
-    const ua = `${base}?role=normal&room=${encodeURIComponent(room)}`;
-    const ub = `${base}?role=willing&room=${encodeURIComponent(room)}`;
+    const ua = base + '?role=normal&room=' + encodeURIComponent(room);
+    const ub = base + '?role=willing&room=' + encodeURIComponent(room);
     document.getElementById('lp-hint').style.display = 'none';
     document.getElementById('link-items').style.display = '';
     document.getElementById('url-a').textContent = ua;
@@ -280,66 +242,127 @@ function showSetup() {
 }
 
 // ════════════ CHAT ════════════
-function startChat(cfg, role, room) {
+async function startChat(role, room) {
   const myName  = role === 'willing' ? NAME_B : NAME_A;
   const myColor = role === 'willing' ? COLOR_B : COLOR_A;
-  const myId    = role + '_' + Math.random().toString(36).slice(2,8);
+  const myId    = role + '_' + Math.random().toString(36).slice(2, 8);
 
-  const app = initializeApp(cfg, 'chatapp_' + Math.random());
-  const db  = getDatabase(app);
-
-  const msgsRef  = ref(db, `chat/${room}/messages`);
-  const metaRef  = ref(db, `chat/${room}/meta/liuchaoSent`);
-  const typeRef  = ref(db, `chat/${room}/typing/${myId}`);
-  const otherTypeRef = ref(db, `chat/${room}/typing`);
-
-  let liuchaoSent = false, isScrolledUp = false;
-  let myTypingTimer = null, typingUsers = {}, typingTimers = {};
+  let liuchaoSent = false;
+  let isScrolledUp = false;
   let seenIds = new Set();
+  let lastCreatedAt = new Date(0).toISOString();
+  let typingTimer = null;
 
-  // ── Listen meta (刘超 first-message flag) ──
-  onValue(metaRef, snap => {
-    liuchaoSent = !!snap.val();
-    updateLock();
-  });
+  // ── Check liuchaoSent flag ──
+  async function checkMeta() {
+    try {
+      const rows = await sbFetch(
+        'chat_messages?room=eq.' + encodeURIComponent(room) +
+        '&msg_type=eq.meta&text=eq.liuchao_sent&limit=1',
+        { prefer: 'return=representation' }
+      );
+      if (rows && rows.length > 0) {
+        liuchaoSent = true;
+        updateLock();
+      }
+    } catch(e) { console.warn('meta check:', e); }
+  }
 
-  // ── Listen messages ──
-  onChildAdded(msgsRef, snap => {
-    const msg = snap.val();
-    if (!msg || seenIds.has(snap.key)) return;
-    seenIds.add(snap.key);
-    addBubble(msg, msg.senderId === myId);
-  });
+  // ── Load initial messages ──
+  async function loadMessages() {
+    try {
+      const rows = await sbFetch(
+        'chat_messages?room=eq.' + encodeURIComponent(room) +
+        '&msg_type=eq.message&order=created_at.asc&limit=200',
+        { prefer: 'return=representation' }
+      );
+      if (rows) {
+        rows.forEach(r => {
+          if (seenIds.has(r.id)) return;
+          seenIds.add(r.id);
+          if (r.created_at > lastCreatedAt) lastCreatedAt = r.created_at;
+          addBubble({
+            senderName: r.sender_name,
+            senderColor: r.sender_color,
+            text: r.text,
+            time: toTime(r.created_at)
+          }, r.sender_id === myId);
+        });
+      }
+    } catch(e) { console.warn('load:', e); }
+  }
 
-  // ── Listen typing ──
-  onValue(otherTypeRef, snap => {
-    const all = snap.val() || {};
-    Object.entries(all).forEach(([id, data]) => {
-      if (id === myId || !data) return;
-      if (data.typing) showTyping(id, data.name);
-      else clearTyping(id);
-    });
-  });
+  // ── Poll for new messages ──
+  async function poll() {
+    try {
+      const rows = await sbFetch(
+        'chat_messages?room=eq.' + encodeURIComponent(room) +
+        '&msg_type=eq.message&created_at=gt.' + encodeURIComponent(lastCreatedAt) +
+        '&order=created_at.asc',
+        { prefer: 'return=representation' }
+      );
+      if (rows && rows.length > 0) {
+        rows.forEach(r => {
+          if (seenIds.has(r.id)) return;
+          seenIds.add(r.id);
+          if (r.created_at > lastCreatedAt) lastCreatedAt = r.created_at;
+          addBubble({
+            senderName: r.sender_name,
+            senderColor: r.sender_color,
+            text: r.text,
+            time: toTime(r.created_at)
+          }, r.sender_id === myId);
+        });
+      }
+      // Also poll meta if not yet unlocked
+      if (!liuchaoSent) await checkMeta();
+      // Poll typing
+      await pollTyping();
+    } catch(e) { console.warn('poll:', e); }
+    setTimeout(poll, 1500);
+  }
 
-  // Show UI
+  // ── Typing via meta rows ──
+  async function pollTyping() {
+    try {
+      const cutoff = new Date(Date.now() - 4000).toISOString();
+      const rows = await sbFetch(
+        'chat_messages?room=eq.' + encodeURIComponent(room) +
+        '&msg_type=eq.typing&sender_id=neq.' + encodeURIComponent(myId) +
+        '&created_at=gt.' + encodeURIComponent(cutoff) +
+        '&order=created_at.desc&limit=5',
+        { prefer: 'return=representation' }
+      );
+      const typers = new Set();
+      if (rows) rows.forEach(r => typers.add(r.sender_name));
+      const names = [...typers];
+      document.getElementById('typing-row').classList.toggle('on', names.length > 0);
+      if (names.length) document.getElementById('typing-text').textContent = names.join('、') + ' 正在输入…';
+    } catch(e) {}
+  }
+
+  // ── Show UI ──
+  await checkMeta();
+  await loadMessages();
+
   document.getElementById('connecting').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('header-room').textContent = '# ' + room;
   document.getElementById('header-sub').textContent = '以 ' + myName + ' 身份登录';
 
-  // no input masking needed
+  updateLock();
+  poll();
 
-  // Wire input
-  const input = document.getElementById('msg-input');
+  // ── Input ──
+  const input   = document.getElementById('msg-input');
   const sendBtn = document.getElementById('btn-send');
-  const overlay = document.getElementById('overlay');
 
   input.oninput = () => {
     resize(input);
     if (canSend()) sendBtn.disabled = !input.value.trim();
-    emitTyping(true);
+    emitTyping();
   };
-  input.onkeydown = e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} };
+  input.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } };
   sendBtn.onclick = send;
   document.getElementById('scroll-btn').onclick = toBottom;
   document.getElementById('msgs').onscroll = function() {
@@ -347,8 +370,6 @@ function startChat(cfg, role, room) {
     isScrolledUp = !atBottom;
     document.getElementById('scroll-btn').classList.toggle('on', isScrolledUp);
   };
-
-  updateLock();
 
   function canSend() { return role === 'normal' || liuchaoSent; }
 
@@ -369,50 +390,62 @@ function startChat(cfg, role, room) {
     }
   }
 
-  function send() {
+  async function send() {
     if (!canSend()) return;
     const raw = input.value.trim(); if (!raw) return;
     const text = role === 'willing' ? '我愿意' : raw;
-    const msg = { senderId: myId, senderName: myName, senderColor: myColor, text, time: nowStr() };
-    push(msgsRef, msg);
-    if (role === 'normal' && !liuchaoSent) {
-      set(ref(db, `chat/${room}/meta/liuchaoSent`), true);
-    }
-    input.value = ''; resize(input);
-    sendBtn.disabled = true;
-    emitTyping(false);
+
+    input.value = ''; resize(input); sendBtn.disabled = true;
+
+    try {
+      await sbFetch('chat_messages', {
+        method: 'POST',
+        prefer: 'return=minimal',
+        body: JSON.stringify({
+          room, sender_id: myId, sender_name: myName,
+          sender_color: myColor, text, msg_type: 'message'
+        })
+      });
+      // Unlock 孟令飞 after first message from 刘超
+      if (role === 'normal' && !liuchaoSent) {
+        liuchaoSent = true;
+        await sbFetch('chat_messages', {
+          method: 'POST',
+          prefer: 'return=minimal',
+          body: JSON.stringify({
+            room, sender_id: myId, sender_name: myName,
+            sender_color: myColor, text: 'liuchao_sent', msg_type: 'meta'
+          })
+        });
+      }
+    } catch(e) { console.error('send:', e); }
   }
 
-  function emitTyping(on) {
-    clearTimeout(myTypingTimer);
-    set(typeRef, { typing: on, name: myName });
-    if (on) myTypingTimer = setTimeout(() => emitTyping(false), 3000);
-  }
-
-  function showTyping(id, name) {
-    typingUsers[id] = name; clearTimeout(typingTimers[id]);
-    typingTimers[id] = setTimeout(() => clearTyping(id), 4500);
-    renderTyping();
-  }
-  function clearTyping(id) { delete typingUsers[id]; clearTimeout(typingTimers[id]); renderTyping(); }
-  function renderTyping() {
-    const names = Object.values(typingUsers);
-    document.getElementById('typing-row').classList.toggle('on', names.length > 0);
-    if (names.length) document.getElementById('typing-text').textContent = names.join('、') + ' 正在输入…';
+  function emitTyping() {
+    clearTimeout(typingTimer);
+    sbFetch('chat_messages', {
+      method: 'POST',
+      prefer: 'return=minimal',
+      body: JSON.stringify({
+        room, sender_id: myId, sender_name: myName,
+        sender_color: myColor, text: 'typing', msg_type: 'typing'
+      })
+    }).catch(() => {});
+    typingTimer = setTimeout(() => {}, 3000);
   }
 
   function addBubble(msg, isSelf) {
     const wrap = document.getElementById('msgs');
-    const empty = document.getElementById('empty'); if(empty) empty.remove();
+    const empty = document.getElementById('empty'); if (empty) empty.remove();
     const g = document.createElement('div');
     g.className = 'msggroup' + (isSelf ? ' self' : '');
-    g.innerHTML = `
-      <div class="msghdr ${isSelf?'rev':''}">
-        <div class="avatar" style="background:${msg.senderColor}">${esc(msg.senderName).slice(0,2)}</div>
-        <span class="mname" style="color:${msg.senderColor}">${esc(msg.senderName)}</span>
-        <span class="mtime">${msg.time}</span>
-      </div>
-      <div class="bubble ${isSelf?'me':'them'}">${esc(msg.text).replace(/\n/g,'<br>')}</div>`;
+    g.innerHTML =
+      '<div class="msghdr ' + (isSelf ? 'rev' : '') + '">' +
+        '<div class="avatar" style="background:' + msg.senderColor + '">' + esc(msg.senderName).slice(0,2) + '</div>' +
+        '<span class="mname" style="color:' + msg.senderColor + '">' + esc(msg.senderName) + '</span>' +
+        '<span class="mtime">' + msg.time + '</span>' +
+      '</div>' +
+      '<div class="bubble ' + (isSelf ? 'me' : 'them') + '">' + esc(msg.text).replace(/\n/g,'<br>') + '</div>';
     wrap.appendChild(g);
     if (!isScrolledUp) toBottom();
   }
@@ -421,6 +454,15 @@ function startChat(cfg, role, room) {
     const w = document.getElementById('msgs'); w.scrollTop = w.scrollHeight;
     isScrolledUp = false; document.getElementById('scroll-btn').classList.remove('on');
   }
+}
+
+// ── Helpers ──
+function resize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 120) + 'px'; }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function toTime(iso) { return new Date(iso).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }); }
+function doCopy(btn, text) {
+  const ok = () => { btn.textContent = '已复制 ✓'; btn.classList.add('ok'); setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('ok'); }, 2000); };
+  navigator.clipboard.writeText(text).then(ok).catch(() => { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); ok(); });
 }
 </script>
 </body>
