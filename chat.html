@@ -324,21 +324,25 @@ function showServerScreen() {
   document.getElementById('btn-connect').onclick = async () => {
     const raw = inp.value.trim().replace(/\/$/, '');
     if (!raw.startsWith('https://') && !raw.startsWith('http://')) {
-      err.style.display = ''; return;
+      err.style.display = '';
+      err.textContent = '地址格式不对，请粘贴完整的 https:// 开头的地址';
+      return;
     }
     err.style.display = 'none';
-    // Test connection
+    const btn = document.getElementById('btn-connect');
+    btn.textContent = '连接中…'; btn.disabled = true;
     try {
       const res = await fetch(raw + '/', {
         headers: { 'ngrok-skip-browser-warning': 'true' }
       });
-      if (!res.ok) throw new Error('server error');
+      if (!res.ok) throw new Error('服务器返回 ' + res.status);
       localStorage.setItem(SERVER_KEY, raw);
       document.getElementById('server-screen').style.display = 'none';
       showSetup(raw);
     } catch(e) {
       err.style.display = '';
-      err.textContent = '无法连接到该地址，请确认服务器已启动且地址正确';
+      err.textContent = '连接失败：' + e.message + '。请确认 node server.js 正在运行，且地址正确。';
+      btn.textContent = '连接'; btn.disabled = false;
     }
   };
   inp.onkeydown = e => { if (e.key === 'Enter') document.getElementById('btn-connect').click(); };
