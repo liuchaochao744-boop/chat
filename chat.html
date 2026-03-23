@@ -266,22 +266,24 @@ function showConfigScreen() {
     const raw = document.getElementById('firebase-config-input').value.trim();
     let cfg;
     try {
-      // Extract just the {...} block, strip JS variable declaration and trailing semicolon
-      const block = raw.replace(/^[\s\S]*?({[\s\S]*?})\s*;?\s*$/, '$1');
-      // Convert JS object literal to JSON: quote unquoted keys
-      const jsonStr = block
-        .replace(/\/\/[^\n]*/g, '')          // remove // comments
-        .replace(/,\s*}/g, '}')             // remove trailing commas
-        .replace(/([{,]\s*)([a-zA-Z_]\w*)\s*:/g, '$1"$2":'); // quote keys
-      cfg = JSON.parse(jsonStr);
+      // Extract the {...} block regardless of surrounding JS syntax
+      const match = raw.match(/({[\s\S]*})/);
+      if (!match) throw new Error('no block');
+      // Safely evaluate as a JS object literal
+      cfg = new Function('return (' + match[1] + ')')();
     } catch(e) {
       document.getElementById('config-err').style.display = '';
-      document.getElementById('config-err').textContent = '格式有误，请粘贴完整的 firebaseConfig 内容（花括号 { } 包裹的部分）';
+      document.getElementById('config-err').textContent = '解析失败：' + e.message + '，请确保粘贴了完整的 { } 内容';
       return;
     }
-    if (!cfg.databaseURL || !cfg.apiKey) {
+    if (!cfg || !cfg.apiKey) {
       document.getElementById('config-err').style.display = '';
-      document.getElementById('config-err').textContent = '缺少 databaseURL 字段，请确认已在 Firebase 控制台创建了 Realtime Database';
+      document.getElementById('config-err').textContent = '缺少 apiKey，请重新复制 firebaseConfig 内容';
+      return;
+    }
+    if (!cfg.databaseURL) {
+      document.getElementById('config-err').style.display = '';
+      document.getElementById('config-err').textContent = '缺少 databaseURL，请确认已在 Firebase 控制台创建 Realtime Database，再重新复制配置';
       return;
     }
     localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
