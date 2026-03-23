@@ -182,7 +182,7 @@
 <body>
 
 <!-- Step 1: 填入服务器地址 -->
-<div id="server-screen">
+<div id="server-screen" style="display:none;">
   <div class="server-card">
     <div class="logo">
       <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></div>
@@ -317,6 +317,7 @@ if (paramRole && paramRoom && paramServer) {
 
 // ════════ SERVER SCREEN ════════
 function showServerScreen() {
+  document.getElementById('server-screen').style.display = 'flex';
   document.getElementById('server-screen').style.display = 'flex';
   const inp = document.getElementById('server-url-input');
   const err = document.getElementById('server-err');
