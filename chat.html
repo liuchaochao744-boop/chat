@@ -329,7 +329,9 @@ function showServerScreen() {
     err.style.display = 'none';
     // Test connection
     try {
-      const res = await fetch(raw + '/');
+      const res = await fetch(raw + '/', {
+        headers: { 'ngrok-skip-browser-warning': 'true' }
+      });
       if (!res.ok) throw new Error('server error');
       localStorage.setItem(SERVER_KEY, raw);
       document.getElementById('server-screen').style.display = 'none';
@@ -385,7 +387,10 @@ async function startChat(serverUrl, role, room) {
   async function api(path, opts = {}) {
     const res = await fetch(serverUrl + path, {
       method: opts.method || 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
       body: opts.body || undefined,
     });
     const text = await res.text();
